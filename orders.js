@@ -43,7 +43,7 @@ if (errors.length > 0) return { orderId: order.id,
 
   const subtotal = calculateSubtotal(order, products);
   const discounts = applyDiscounts(order, customer, products, subtotal);
-  const tax = calculateTax(customer, subtotal, taxRates);
+  const tax = calculateTax(customer, discounts.discountedSubtotal, taxRates);
   const shipping = calculateShipping(discounts.discountedSubtotal);
 
   const total = discounts.discountedSubtotal + tax + shipping;
