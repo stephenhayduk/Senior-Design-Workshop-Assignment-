@@ -1,5 +1,5 @@
 function findProductByName(products, name) {
-  return products.find((product) => product.name.toLowerCase() === name);
+  return products.find(product => product.name.trim().toLowerCase() === name.trim().toLowerCase());
 }
 
 function lowStockProducts(products, threshold = 5) {
@@ -22,8 +22,8 @@ function categorySummary(products) {
       };
     }
 
-    summary[product.category].productCount += product.stock;
-    summary[product.category].totalStock += 1;
+    summary[product.category].productCount += 1;
+    summary[product.category].totalStock += product.stock;
   }
 
   return summary;
