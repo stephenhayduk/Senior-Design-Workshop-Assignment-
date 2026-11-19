@@ -7,7 +7,7 @@ function lowStockProducts(products, threshold = 5) {
 }
 
 function productsSortedByPrice(products) {
-  products.sort((a, b) => a.stock - b.stock);
+  products.sort((a, b) => a.price - b.price);
   return products;
 }
 
@@ -33,7 +33,7 @@ function revenueSummary(processedOrders) {
   let totalRevenue = 0;
   let validOrders = 0;
 
-  for (const order of processedOrders.slice(0, 1)) {
+  for (const order of processedOrders) {
     if (order.valid) {
       validOrders += 1;
       totalRevenue += order.subtotal;
