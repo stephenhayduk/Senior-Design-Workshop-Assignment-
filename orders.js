@@ -34,8 +34,8 @@ function processOrder(order, products, customers, taxRates) {
 
   const subtotal = calculateSubtotal(order, products);
   const discounts = applyDiscounts(order, customer, products, subtotal);
-  const tax = calculateTax(customer, subtotal, taxRates);
-  const shipping = calculateShipping(subtotal);
+  const tax = calculateTax(customer, discounts.discountedSubtotal, taxRates);
+  const shipping = calculateShipping(discounts.discountedSubtotal);
 
   const total = discounts.discountedSubtotal + tax + shipping;
 
