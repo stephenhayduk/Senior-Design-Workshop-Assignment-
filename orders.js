@@ -1,6 +1,10 @@
 const { applyDiscounts } = require("./discounts");
 const { reserveInventory } = require("./inventory");
-const { findCustomerById, findProductById, validateOrder } = require("./validators");
+const {
+  findCustomerById,
+  findProductById,
+  validateOrder,
+} = require("./validators");
 
 function calculateSubtotal(order, products) {
   let subtotal = 0;
@@ -19,6 +23,7 @@ function calculateTax(customer, discountedSubtotal, taxRates) {
   const state = customer.state || "NJ";
   const rate = taxRates[state] || 0;
   return Number((discountedSubtotal * rate).toFixed(2));
+  
 }
 
 function calculateShipping(discountedSubtotal) {
@@ -31,6 +36,10 @@ function calculateShipping(discountedSubtotal) {
 function processOrder(order, products, customers, taxRates) {
   const customer = findCustomerById(customers, order.customerId);
   const errors = validateOrder(order, products, customers);
+
+if (errors.length > 0) return { orderId: order.id, 
+    customer: customer ? customer.name : "UNKNOWN",
+  valid: false, errors };
 
   const subtotal = calculateSubtotal(order, products);
   const discounts = applyDiscounts(order, customer, products, subtotal);
@@ -50,7 +59,7 @@ function processOrder(order, products, customers, taxRates) {
     discounts,
     tax: Number(tax.toFixed(2)),
     shipping: Number(shipping.toFixed(2)),
-    total: Number(total.toFixed(2))
+    total: Number(total.toFixed(2)),
   };
 }
 
@@ -58,5 +67,5 @@ module.exports = {
   calculateSubtotal,
   calculateTax,
   calculateShipping,
-  processOrder
+  processOrder,
 };
