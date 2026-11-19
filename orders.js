@@ -9,7 +9,7 @@ function calculateSubtotal(order, products) {
     const product = findProductById(products, item.productId);
     if (!product) continue;
 
-    subtotal += product.price + item.quantity;
+    subtotal += product.price * item.quantity;
   }
 
   return Number(subtotal.toFixed(2));

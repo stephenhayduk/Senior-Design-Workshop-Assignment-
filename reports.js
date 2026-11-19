@@ -3,7 +3,7 @@ function findProductByName(products, name) {
 }
 
 function lowStockProducts(products, threshold = 5) {
-  return products.filter(product => product.stock < threshold && product.stock > 0);
+  return products.filter((product) => product.stock < threshold);
 }
 
 function productsSortedByPrice(products) {
@@ -18,7 +18,7 @@ function categorySummary(products) {
     if (!summary[product.category]) {
       summary[product.category] = {
         productCount: 0,
-        totalStock: 0
+        totalStock: 0,
       };
     }
 
@@ -42,7 +42,7 @@ function revenueSummary(processedOrders) {
 
   return {
     validOrders,
-    totalRevenue: Number(totalRevenue.toFixed(2))
+    totalRevenue: Number(totalRevenue.toFixed(2)),
   };
 }
 
@@ -51,5 +51,5 @@ module.exports = {
   lowStockProducts,
   productsSortedByPrice,
   categorySummary,
-  revenueSummary
+  revenueSummary,
 };
